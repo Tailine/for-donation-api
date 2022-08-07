@@ -3,10 +3,12 @@
     "target": "es2017",
     "module": "commonjs",                         
     "rootDir": "./src",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./scr/config/@types"
-    ],
+    "baseUrl": "src",
+    "paths": {
+      "@user/*": ["./user/*"],
+      "@donation/*": ["./donation/*"],
+      "@shared/*": ["./src/config/*"]
+    },
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
