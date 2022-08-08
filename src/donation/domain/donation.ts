@@ -1,6 +1,7 @@
 import { Email } from 'shared/email'
 import { Phone } from 'shared/phone'
 import { Result } from 'shared/result'
+import { Category } from './category'
 
 export class Donation {
   private constructor(
@@ -9,6 +10,7 @@ export class Donation {
     private readonly phone: string,
     private readonly description: string,
     private readonly images: string[],
+    private readonly category: Category,
     private readonly id: string | null = null
   ) {
     Object.freeze(this)
@@ -19,6 +21,8 @@ export class Donation {
     email: string,
     phone: string,
     description: string,
+    categoryId: string,
+    categoryName: string,
     images: string[]
   ): Result<Donation> {
     if (!title) {
@@ -37,14 +41,26 @@ export class Donation {
 
     const emailOrError = Email.create(email)
     const phoneOrError = Phone.create(phone)
-    const donationPropsResult = Result.combine([emailOrError, phoneOrError])
+    const categoryOrError = Category.create(categoryId, categoryName)
+    const donationPropsResult = Result.combine([
+      emailOrError,
+      phoneOrError,
+      categoryOrError
+    ])
 
     if (donationPropsResult.isFailure) {
       return Result.fail(donationPropsResult.error ?? '')
     }
 
     return Result.ok<Donation>(
-      new Donation(title, email, phone, description, images)
+      new Donation(
+        title,
+        email,
+        phone,
+        description,
+        images,
+        categoryOrError.getValue()!
+      )
     )
   }
 
@@ -54,6 +70,8 @@ export class Donation {
     email: string,
     phone: string,
     description: string,
+    categoryId: string,
+    categoryName: string,
     images: string[]
   ): Result<Donation> {
     if (!id) {
@@ -76,14 +94,26 @@ export class Donation {
 
     const emailOrError = Email.create(email)
     const phoneOrError = Phone.create(phone)
-    const donationPropsResult = Result.combine([emailOrError, phoneOrError])
+    const categoryOrError = Category.create(categoryId, categoryName)
+    const donationPropsResult = Result.combine([
+      emailOrError,
+      phoneOrError,
+      categoryOrError
+    ])
 
     if (donationPropsResult.isFailure) {
       return Result.fail(donationPropsResult.error ?? '')
     }
 
     return Result.ok<Donation>(
-      new Donation(title, email, phone, description, images)
+      new Donation(
+        title,
+        email,
+        phone,
+        description,
+        images,
+        categoryOrError.getValue()!
+      )
     )
   }
 }
