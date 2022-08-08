@@ -1,9 +1,8 @@
+import { Email } from 'shared/email'
+import { Phone } from 'shared/phone'
 import { Result } from 'shared/result'
-import { City } from './city'
-import { Email } from './email'
 import { Name } from './name'
 import { Password } from './password'
-import { Phone } from './phone'
 
 export class User {
   private constructor(
@@ -28,14 +27,20 @@ export class User {
   ) {
     const nameOrError = Name.create(name)
     const emailOrError = Email.create(email)
-    const cityOrError = City.create(city, state)
     const passwordOrError = Password.create(password)
     const phoneOrError = Phone.create(phone)
+
+    if (!city) {
+      return Result.fail('Cidade não pode ser vazia.')
+    }
+
+    if (!state) {
+      return Result.fail('Estado não pode ser vazio.')
+    }
 
     return Result<any>.combine([
       nameOrError,
       emailOrError,
-      cityOrError,
       passwordOrError,
       phoneOrError
     ])
@@ -68,9 +73,7 @@ export class User {
     password: string
   ): Result<User> {
     if (!id) {
-      return Result.fail<User>(
-        'Missing id. To create a new user call createWithoutId method.'
-      )
+      return Result.fail<User>('"id" não fornecido.')
     }
 
     const validation = this.validate(name, email, city, state, phone, password)

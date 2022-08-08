@@ -17,6 +17,8 @@ export class Phone {
       )
     }
 
+    // TODO: validate that all characters are numbers
+
     return Result.ok<Phone>(new Phone(phone))
   }
 }
