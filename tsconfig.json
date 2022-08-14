@@ -7,7 +7,8 @@
     "paths": {
       "@user/*": ["./user/*"],
       "@donation/*": ["./donation/*"],
-      "@shared/*": ["./src/config/*"]
+      "@shared/*": ["./shared/*"],
+      "@config/*": ["./config/*"]
     },
     "outDir": "./dist",
     "esModuleInterop": true,

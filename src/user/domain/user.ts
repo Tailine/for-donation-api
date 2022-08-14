@@ -1,6 +1,6 @@
-import { Email } from 'shared/email'
-import { Phone } from 'shared/phone'
-import { Result } from 'shared/result'
+import { Email } from '@shared/email'
+import { Phone } from '@shared/phone'
+import { Result } from '@shared/result'
 import { Name } from './name'
 import { Password } from './password'
 
@@ -60,7 +60,7 @@ export class User {
       return Result.fail<User>(validation.error ?? '')
     }
 
-    return Result.ok(new User(name, email, city, state, phone, password))
+    return Result.ok<User>(new User(name, email, city, state, phone, password))
   }
 
   static createWithId(
