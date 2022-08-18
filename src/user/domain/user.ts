@@ -11,8 +11,7 @@ export class User {
     private readonly city: string,
     private readonly state: string,
     private readonly phone: string,
-    private readonly password: string,
-    private readonly id: string | null = null
+    private readonly password: string
   ) {
     Object.freeze(this)
   }
@@ -46,7 +45,7 @@ export class User {
     ])
   }
 
-  static createWithoutId = (
+  static create = (
     name: string,
     email: string,
     city: string,
@@ -61,28 +60,5 @@ export class User {
     }
 
     return Result.ok<User>(new User(name, email, city, state, phone, password))
-  }
-
-  static createWithId(
-    id: string,
-    name: string,
-    email: string,
-    city: string,
-    state: string,
-    phone: string,
-    password: string
-  ): Result<User> {
-    if (!id) {
-      return Result.fail<User>('"id" não fornecido.')
-    }
-
-    const validation = this.validate(name, email, city, state, phone, password)
-    if (validation.isFailure) {
-      return Result.fail<User>(validation.error ?? '')
-    }
-
-    return Result.ok<User>(
-      new User(name, email, city, state, phone, password, id)
-    )
   }
 }
