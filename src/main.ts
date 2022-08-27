@@ -1,6 +1,8 @@
+import 'reflect-metadata'
 import express from 'express'
 import { donationRoutes } from 'routes/donation'
 import { userRoutes } from 'routes/user'
+import '@config/typeorm'
 
 const PORT = process.env.PORT || 5000
 
