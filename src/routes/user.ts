@@ -1,8 +1,8 @@
-import { RegisterUserController } from './../user/adapter/in/register-user-controller'
+import { makeUserController } from '@user/factories/makeUserController'
 import { Router } from 'express'
 
 const userRoutes = Router()
 
-userRoutes.post('/', RegisterUserController.execute)
+userRoutes.post('/', makeUserController().handle)
 
 export { userRoutes }

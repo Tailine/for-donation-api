@@ -7,7 +7,7 @@ export class Password {
 
   static create(password: string): Result<Password> {
     if (!password) {
-      return Result.fail<Password>('Password cannot be empty.')
+      return Result.fail<Password>('Senha não pode ser vazia.')
     }
 
     const minimumEightLenOneLetterOneNumber =
@@ -15,7 +15,7 @@ export class Password {
 
     if (!password.match(minimumEightLenOneLetterOneNumber)) {
       return Result.fail<Password>(
-        'Password must be at least 8 characters long and have at least one number .'
+        'Senha deve conter pelo menos 8 caracteres e ter pelo menos um número.'
       )
     }
 
