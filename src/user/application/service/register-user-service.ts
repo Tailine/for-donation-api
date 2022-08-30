@@ -12,9 +12,6 @@ export class RegisterUserService implements RegisterUserPort {
   ) {}
 
   async execute(userData: UserData): Promise<UserData | AppError> {
-    // validate userdata
-    // check if user exists on database
-
     const userOrError = User.create(
       userData.name,
       userData.email,
@@ -29,6 +26,10 @@ export class RegisterUserService implements RegisterUserPort {
     }
 
     const hashedPassword = await this.passwordEncoder.hash(userData.password)
+
+    if (await this.userRepository.findByEmail(userData.email)) {
+      return new AppError('User already exists!')
+    }
 
     return this.userRepository.registerUser({
       ...userData,

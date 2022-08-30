@@ -47,7 +47,7 @@ export class RegisterUserController {
         data: result
       })
     } catch (error) {
-      console.log(error)
+      console.error(error)
       return response.status(500).json({
         message: 'Erro no servidor, tente novamente mais tarde'
       })
