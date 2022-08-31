@@ -1,12 +1,13 @@
+import 'dotenv/config'
 import { DataSource } from 'typeorm'
 
-export const postgresDataSource = new DataSource({
+const postgresDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
-  port: 5432,
-  database: 'for-donation',
-  username: 'postgres',
-  password: 'secret',
+  port: process.env.POSTGRES_PORT as number | undefined,
+  database: process.env.POSTGRES_DB,
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
   entities: ['src/**/*.entity.ts'],
   migrations: ['src/shared/typeorm/migrations/*.ts']
 })
@@ -19,3 +20,5 @@ postgresDataSource
   .catch((err) => {
     console.error('Error during Data Source initialization:', err)
   })
+
+export { postgresDataSource }
