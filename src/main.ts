@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import '@config/typeorm'
+import cookieParser from 'cookie-parser'
 import express from 'express'
 import { donationRoutes } from 'routes/donation'
 import { userRoutes } from 'routes/user'
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 5000
 
 const app = express()
 
+app.use(cookieParser())
 app.use(express.json())
 
 app.use('/donation', donationRoutes)
