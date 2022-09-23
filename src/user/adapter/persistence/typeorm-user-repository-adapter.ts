@@ -15,7 +15,7 @@ export class TypeormUserRepository implements UserRepository {
     return this.userRepository.save(user)
   }
 
-  async findByEmail(email: string): Promise<boolean> {
-    return Boolean(await this.userRepository.findOneBy({ email }))
+  async findByEmail(email: string): Promise<User | null> {
+    return this.userRepository.findOneBy({ email })
   }
 }
