@@ -1,10 +1,10 @@
-import { SigninUserController } from './../user/adapter/signin-user-controller'
-import { makeUserController } from '@user/factories/makeUserController'
+import { makeRegisterUserController } from '@user/factories/makeRegisterUserController'
 import { Router } from 'express'
+import { makeAuthUserController } from '@user/factories/makeAuthUserController'
 
 const userRoutes = Router()
 
-userRoutes.post('/signup', makeUserController().handle)
-userRoutes.get('/signin', SigninUserController.handle)
+userRoutes.post('/signup', makeRegisterUserController().handle)
+userRoutes.get('/signin', makeAuthUserController().handle)
 
 export { userRoutes }
