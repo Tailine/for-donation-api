@@ -9,7 +9,8 @@
       "@donation/*": ["./donation/*"],
       "@place/*": ["./place/*"],
       "@shared/*": ["./shared/*"],
-      "@config/*": ["./config/*"]
+      "@config/*": ["./config/*"],
+      "@external-libraries/*": ["./external-libraries/*"]
     },
     "outDir": "./dist",
     "esModuleInterop": true,
