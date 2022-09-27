@@ -2,7 +2,7 @@ import { JwtTokenManager } from './../../external-libraries/token-manager/token-
 import { BcryptEncoder } from '@user/adapter/persistence/bcrypt-encoder'
 import { TypeormUserRepository } from '@user/adapter/persistence/typeorm-user-repository-adapter'
 import { AuthService } from '@user/application/service/auth-service'
-import { SigninUserController } from '@user/adapter/signin-user-controller'
+import { SignInUserController } from '@user/adapter/signin-user-controller'
 
 export const makeAuthUserController = () => {
   const userRepository = new TypeormUserRepository()
@@ -13,5 +13,5 @@ export const makeAuthUserController = () => {
     bcryptEncoder,
     passwordManager
   )
-  return new SigninUserController(registerUserService)
+  return new SignInUserController(registerUserService)
 }

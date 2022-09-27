@@ -4,7 +4,7 @@ import { Password } from '@user/domain/password'
 import { AuthService } from '@user/application/service/auth-service'
 import { AppError } from '@shared/appError'
 
-export class SigninUserController {
+export class SignInUserController {
   constructor(private authService: AuthService) {}
 
   handle = async (request: Request, response: Response) => {
