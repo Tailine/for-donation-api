@@ -6,7 +6,7 @@ export class JwtTokenManager implements TokenManager {
 
   sign(payload: Record<string, string>): string {
     return jwt.sign(payload, this.secret, {
-      expiresIn: 60 * 60
+      expiresIn: '7d'
     })
   }
 }
