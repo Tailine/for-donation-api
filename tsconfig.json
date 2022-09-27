@@ -21,6 +21,10 @@
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "typeRoots": [
+      "src/config/@types/express/index.d.ts",
+      "./node_modules/@types"
+    ]
   }
 }
