@@ -6,8 +6,8 @@ import { SignOutUserController } from '@user/adapter/signout-user-controller'
 
 const userRoutes = Router()
 
-userRoutes.post('/signup', makeRegisterUserController().handle)
-userRoutes.get('/signin', makeAuthUserController().handle)
-userRoutes.get('/signout', authorization, SignOutUserController.handle)
+userRoutes.post('/sign-up', makeRegisterUserController().handle)
+userRoutes.get('/sign-in', makeAuthUserController().handle)
+userRoutes.get('/sign-out', authorization, SignOutUserController.handle)
 
 export { userRoutes }
