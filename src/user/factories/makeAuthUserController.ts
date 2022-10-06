@@ -1,4 +1,4 @@
-import { JwtTokenManager } from './../../external-libraries/token-manager/token-manager-adapter'
+import { JwtTokenManager } from '../../external-libraries/token-manager/jwt-token-manager-adapter'
 import { BcryptEncoder } from '@user/adapter/persistence/bcrypt-encoder'
 import { TypeormUserRepository } from '@user/adapter/persistence/typeorm-user-repository-adapter'
 import { AuthService } from '@user/application/service/auth-service'
