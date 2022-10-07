@@ -8,6 +8,7 @@
       "@user/*": ["./user/*"],
       "@donation/*": ["./donation/*"],
       "@place/*": ["./place/*"],
+      "@category/*": ["./category/*"],
       "@shared/*": ["./shared/*"],
       "@config/*": ["./config/*"],
       "@external-libraries/*": ["./external-libraries/*"]
