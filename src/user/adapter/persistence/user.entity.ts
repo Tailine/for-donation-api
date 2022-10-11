@@ -3,8 +3,10 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm'
+import { Donation } from '../../../donation/adapter/persistence/donation.entity'
 
 @Entity()
 export class User {
@@ -34,4 +36,7 @@ export class User {
 
   @UpdateDateColumn()
   updated_at: Date
+
+  @OneToMany(() => Donation, (donation) => donation.user)
+  donations: Donation[]
 }
