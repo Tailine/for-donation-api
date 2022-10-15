@@ -1,7 +1,7 @@
 import { Email } from 'shared/email'
 import { Phone } from 'shared/phone'
 import { Result } from 'shared/result'
-import { Category } from './category'
+import { Category } from '../../category/domain/category'
 
 export class Donation {
   private constructor(
