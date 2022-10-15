@@ -4,4 +4,5 @@ import { User } from './user.entity'
 export interface UserRepository {
   registerUser(user: UserData): Promise<UserData>
   findByEmail(email: string): Promise<User | null>
+  findById(email: string): Promise<User | null>
 }
