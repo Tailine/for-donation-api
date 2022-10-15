@@ -23,7 +23,8 @@ export class RegisterUserController {
 
     if (!name || !email || !phone || !state || !city || !password) {
       return response.status(400).json({
-        message: 'Informação incompleta. Verifique os dados inseridos.'
+        message:
+          'Todos os dados são obrigatórios. Verifique os dados inseridos.'
       })
     }
 
@@ -47,7 +48,6 @@ export class RegisterUserController {
         data: result
       })
     } catch (error) {
-      console.error(error)
       return response.status(500).json({
         message: 'Erro no servidor, tente novamente mais tarde'
       })
