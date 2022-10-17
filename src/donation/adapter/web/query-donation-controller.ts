@@ -1,8 +1,8 @@
-import { QueryDonationPort } from '@donation/application/port/donation-query-port'
+import { DonationQueryPort } from '@donation/application/port/donation-query-port'
 import { Request, Response } from 'express'
 
 export class QueryDonationController {
-  constructor(private donationService: QueryDonationPort) {}
+  constructor(private donationService: DonationQueryPort) {}
 
   getAll = async (_: Request, response: Response) => {
     try {
