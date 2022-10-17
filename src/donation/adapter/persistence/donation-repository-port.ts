@@ -8,6 +8,7 @@ export interface DonationRepository {
     userId: string
   ): Promise<Donation | AppError>
   findAll(): Promise<Donation[]>
+  findById(id: string): Promise<Donation | null>
 }
 
 export type NewDonation = Omit<DonationData, 'images'> & {
