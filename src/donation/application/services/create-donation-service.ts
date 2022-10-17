@@ -1,8 +1,6 @@
 import { CategoryRepository } from '@category/adapter/persistence/category-repository'
-import {
-  DonationDbData,
-  DonationRepository
-} from '@donation/adapter/persistence/donation-repository-port'
+import { DonationRepository } from '@donation/adapter/persistence/donation-repository-port'
+import { Donation } from '@donation/adapter/persistence/donation.entity'
 import { ImageStorage } from '@external-libraries/supabase-storage/image-storage'
 import { AppError } from '@shared/appError'
 import { UserRepository } from '@user/adapter/persistence/user-repository-port'
@@ -20,7 +18,7 @@ export class CreateDonationService implements CreateDonationUseCase {
   async execute(
     donation: DonationData,
     userId: string
-  ): Promise<DonationDbData | AppError> {
+  ): Promise<Donation | AppError> {
     if (!(await this.userRepository.findById(userId))) {
       return new AppError('Usuário não existe.')
     }
@@ -49,9 +47,12 @@ export class CreateDonationService implements CreateDonationUseCase {
       }
     }
 
-    return this.donationRepository.createDonation({
-      ...donation,
-      images: uploadedImages
-    })
+    return this.donationRepository.createDonation(
+      {
+        ...donation,
+        images: uploadedImages
+      },
+      userId
+    )
   }
 }
