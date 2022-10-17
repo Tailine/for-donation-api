@@ -32,7 +32,6 @@ export class Donation {
   @ManyToOne(() => User, (user) => user.donations)
   user: User
 
-  @OneToOne(() => Category)
-  @JoinColumn()
+  @ManyToOne(() => Category)
   category: Category
 }
