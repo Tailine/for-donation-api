@@ -34,6 +34,13 @@ export class TypeormDonationRepository implements DonationRepository {
     })
   }
 
+  async findById(id: string): Promise<Donation | null> {
+    return this.donationRepository.findOne({
+      where: { id },
+      relations: { category: true }
+    })
+  }
+
   static createDonationEntity(
     donationData: NewDonation,
     userId: string,

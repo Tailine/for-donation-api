@@ -14,4 +14,16 @@ export class QueryDonationController {
       })
     }
   }
+
+  getById = async (request: Request, response: Response) => {
+    try {
+      const donationId = request.params.id
+      const donation = await this.donationService.getDonationById(donationId)
+      return response.status(200).json(donation)
+    } catch (error) {
+      return response.status(400).json({
+        message: 'Erro ao buscar doações. Tente novamente mais tarde'
+      })
+    }
+  }
 }

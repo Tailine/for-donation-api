@@ -6,8 +6,10 @@ import { makeQueryDonationController } from '@donation/factories/makeQueryDonati
 const upload = multer()
 
 const donationRoutes = Router()
+const queryDonation = makeQueryDonationController()
 
-donationRoutes.get('/', makeQueryDonationController().getAll)
+donationRoutes.get('/:id', queryDonation.getById)
+donationRoutes.get('/', queryDonation.getAll)
 donationRoutes.post(
   '/',
   upload.array('images'),
