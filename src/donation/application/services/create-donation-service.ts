@@ -40,10 +40,7 @@ export class CreateDonationService implements CreateDonationUseCase {
     const uploadedImages = []
     for (const result of uploadedResult) {
       if (result.data) {
-        const imageUrl = this.imageStorage.getImageUrl(result.data.Key)
-        if (imageUrl) {
-          uploadedImages.push(result.data.Key)
-        }
+        uploadedImages.push(result.data.Key)
       }
     }
 
