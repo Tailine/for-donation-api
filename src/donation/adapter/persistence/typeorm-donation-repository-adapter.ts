@@ -41,6 +41,12 @@ export class TypeormDonationRepository implements DonationRepository {
     })
   }
 
+  async delete(id: string): Promise<boolean> {
+    const affectedRows = (await this.donationRepository.delete({ id })).affected
+    const hasDeleted = Boolean(affectedRows)
+    return hasDeleted
+  }
+
   static createDonationEntity(
     donationData: NewDonation,
     userId: string,
