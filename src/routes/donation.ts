@@ -1,4 +1,4 @@
-import { makeDonationController } from '@donation/factories/makeDonationController'
+import { makeCreateDonationController } from '@donation/factories/makeCreateDonationController'
 import { Router } from 'express'
 import multer from 'multer'
 import { makeQueryDonationController } from '@donation/factories/makeQueryDonationController'
@@ -14,7 +14,7 @@ donationRoutes.get('/', queryDonation.getAll)
 donationRoutes.post(
   '/',
   upload.array('images'),
-  makeDonationController().handle
+  makeCreateDonationController().handle
 )
 donationRoutes.delete('/:id', makeDeleteDonationController().handle)
 
