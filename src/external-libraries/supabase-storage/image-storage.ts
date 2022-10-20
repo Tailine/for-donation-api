@@ -6,4 +6,5 @@ export interface ImageStorage {
     files: Image[]
   ): Promise<{ data: { Key: string } | null; error: Error | null }[]>
   getImageUrl(path: string): string | null
+  delete(paths: string[]): Promise<boolean>
 }
