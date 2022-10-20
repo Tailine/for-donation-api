@@ -24,4 +24,12 @@ export class SupabaseImageStorage implements ImageStorage {
     return supabase.storage.from(this.storageBucket).getPublicUrl(path)
       .publicURL
   }
+
+  async delete(paths: string[]): Promise<boolean> {
+    const { error } = await supabase.storage
+      .from(this.storageBucket)
+      .remove(paths)
+
+    return error === null
+  }
 }
