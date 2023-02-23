@@ -7,8 +7,9 @@
     "dev": "ts-node-dev --files --respawn --ignore-watch node_modules --no-notify -r tsconfig-paths/register src/main.ts",
     "typeorm": "npx typeorm-ts-node-esm",
     "typeorm:create": "npx typeorm-ts-node-esm migration:create",
-    "typeorm:generate": "npx typeorm-ts-node-esm migration:generate -d ./src/config/typeorm",
-    "typeorm:run": "npx typeorm-ts-node-esm migration:run -d ./src/config/typeorm"
+    "typeorm:generate": "npx typeorm-ts-node-esm migration:generate ./src/shared/typeorm/migrations/migrationName.ts -d ./src/config/typeorm -p",
+    "typeorm:run": "npx typeorm-ts-node-esm migration:run -d ./src/config/typeorm",
+    "typeorm:drop": "npx typeorm-ts-node-esm schema:drop -d ./src/config/typeorm"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
@@ -31,6 +33,7 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/multer": "^1.4.7",
