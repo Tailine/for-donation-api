@@ -10,6 +10,10 @@ export class TypeormCategoryRepository implements CategoryRepository {
     this.categoryRepository = postgresDataSource.getRepository(Category)
   }
 
+  async findAll(): Promise<Category[] | null> {
+    return this.categoryRepository.find()
+  }
+
   async findById(id: number): Promise<Category | null> {
     return this.categoryRepository.findOneBy({ id })
   }
