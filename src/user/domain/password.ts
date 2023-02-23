@@ -10,10 +10,10 @@ export class Password {
       return Result.fail<Password>('Senha não pode ser vazia.')
     }
 
-    const minimumEightLenOneLetterOneNumber =
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+    const passWithCapitalLetterEightLenSpecialCharacterNumber =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/
 
-    if (!password.match(minimumEightLenOneLetterOneNumber)) {
+    if (!password.match(passWithCapitalLetterEightLenSpecialCharacterNumber)) {
       return Result.fail<Password>(
         'Senha deve conter pelo menos 8 caracteres e ter pelo menos um número.'
       )
