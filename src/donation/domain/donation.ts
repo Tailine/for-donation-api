@@ -5,12 +5,12 @@ import { Category } from '../../category/domain/category'
 
 export class Donation {
   private constructor(
-    private readonly title: string,
-    private readonly email: string,
-    private readonly phone: string,
-    private readonly description: string,
-    private readonly images: string[],
-    private readonly category: Category
+    private readonly _title: string,
+    private readonly _email: string,
+    private readonly _phone: string,
+    private readonly _description: string,
+    private readonly _images: string[],
+    private readonly _category: Category
   ) {
     Object.freeze(this)
   }
@@ -20,7 +20,7 @@ export class Donation {
     email: string,
     phone: string,
     description: string,
-    categoryId: string,
+    categoryId: number,
     categoryName: string,
     images: string[]
   ): Result<Donation> {
@@ -61,5 +61,29 @@ export class Donation {
         categoryOrError.getValue()!
       )
     )
+  }
+
+  public get title() {
+    return this._title
+  }
+
+  public get email() {
+    return this._email
+  }
+
+  public get phone() {
+    return this._phone
+  }
+
+  public get description() {
+    return this._description
+  }
+
+  public get category() {
+    return this._category
+  }
+
+  public get images() {
+    return this._images
   }
 }
