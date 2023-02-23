@@ -45,11 +45,11 @@ export class RegisterUserController {
       }
 
       return response.status(200).json({
-        data: result
+        message: 'Conta criada com sucesso'
       })
     } catch (error) {
       return response.status(500).json({
-        message: 'Erro no servidor, tente novamente mais tarde'
+        message: 'Erro ao criar usuário, tente novamente mais tarde'
       })
     }
   }
