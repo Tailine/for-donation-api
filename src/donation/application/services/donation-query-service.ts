@@ -5,7 +5,7 @@ import { DonationQueryPort } from '../port/donation-query-port'
 export class DonationQueryService implements DonationQueryPort {
   constructor(private donationRepository: DonationRepository) {}
 
-  async getDonationById(id: string): Promise<Donation | null> {
+  getDonationById(id: string): Promise<Donation | null> {
     return this.donationRepository.findById(id)
   }
 

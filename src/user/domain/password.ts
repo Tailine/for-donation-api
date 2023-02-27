@@ -13,7 +13,12 @@ export class Password {
     const passWithCapitalLetterEightLenSpecialCharacterNumber =
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/
 
-    if (!password.match(passWithCapitalLetterEightLenSpecialCharacterNumber)) {
+    console.log(
+      'MATCH',
+      password,
+      passWithCapitalLetterEightLenSpecialCharacterNumber.test(password)
+    )
+    if (!passWithCapitalLetterEightLenSpecialCharacterNumber.test(password)) {
       return Result.fail<Password>(
         'Senha deve conter pelo menos 8 caracteres e ter pelo menos um número.'
       )

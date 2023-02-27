@@ -7,4 +7,10 @@ export interface ImageStorage {
   ): Promise<{ data: { Key: string } | null; error: Error | null }[]>
   getImageUrl(path: string): string | null
   delete(paths: string[]): Promise<boolean>
+  listImageByUser(userId: string): Promise<UploadResult>
+}
+
+export type UploadResult = {
+  data: string[] | null
+  error: Error | null
 }

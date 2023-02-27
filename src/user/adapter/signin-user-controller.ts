@@ -12,24 +12,25 @@ export class SignInUserController {
 
     const emailOrError = Email.create(email)
     const passwordOrError = Password.create(password)
+    console.log({ passwordOrError })
     if (emailOrError.isFailure || passwordOrError.isFailure) {
       return response.status(400).json({ message: 'Email ou senha inválidos' })
     }
 
-    const errorOrToken = await this.authService.signIn(email, password)
-    if (errorOrToken instanceof AppError) {
-      return response.status(errorOrToken.statusCode).json({
-        status: errorOrToken.statusCode,
-        message: errorOrToken.message
+    const errorOrAuthData = await this.authService.signIn(email, password)
+    if (errorOrAuthData instanceof AppError) {
+      return response.status(errorOrAuthData.statusCode).json({
+        message: errorOrAuthData.message
       })
     }
 
-    return response
-      .cookie('access_token', errorOrToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production'
-      })
-      .status(200)
-      .json({ status: 200, message: 'Logged in successfully' })
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production'
+    }
+
+    response.cookie('user_id', errorOrAuthData.id, cookieOptions)
+    response.cookie('access_token', errorOrAuthData.token, cookieOptions)
+    return response.status(200).json({ message: 'Usuário logado' })
   }
 }

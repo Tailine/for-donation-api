@@ -1,22 +1,22 @@
+import { TokenManager } from '@external-libraries/token-manager/token-manager-port'
+import { AppError } from '@shared/appError'
 import { NextFunction, Request, Response } from 'express'
-import jwt, { JwtPayload } from 'jsonwebtoken'
 
-export const authorization = (
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
-  const accessToken = request.cookies.access_token
-  if (!accessToken) {
-    return response.sendStatus(403)
-  }
+export class Authorization {
+  constructor(private tokenManager: TokenManager) {}
 
-  try {
-    const data = jwt.verify(accessToken, process.env.JWT_SECRET!) as JwtPayload
-    console.log({ data })
-    request.id = data.userId
-    return next()
-  } catch (error) {
-    return response.sendStatus(403)
+  verify = (req: Request, res: Response, next: NextFunction) => {
+    const accessToken = req.cookies['access_token']
+    if (!accessToken) {
+      return res.status(403).json({ message: 'Acesso não autorizado.' })
+    }
+
+    const decodedTokenOrError = this.tokenManager.verify(accessToken)
+    if (decodedTokenOrError instanceof AppError) {
+      return res.status(403).json({ message: 'Acesso não autorizado.' })
+    }
+
+    req.id = decodedTokenOrError.userId
+    next()
   }
 }

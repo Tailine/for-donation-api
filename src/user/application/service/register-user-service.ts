@@ -28,7 +28,7 @@ export class RegisterUserService implements RegisterUserPort {
     const hashedPassword = await this.passwordEncoder.hash(userData.password)
 
     if (await this.userRepository.findByEmail(userData.email)) {
-      return new AppError('User already exists!')
+      return new AppError('Usuário já cadastrado')
     }
 
     return this.userRepository.registerUser({

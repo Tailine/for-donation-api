@@ -12,7 +12,7 @@ export class DeleteDonationService implements DeleteDonationPort {
   async delete(id: string): Promise<boolean | AppError> {
     const donation = await this.donationRepository.findById(id)
     if (!donation) {
-      return new AppError('Doação não existe.', 404)
+      return new AppError('Doação não existe', 404)
     }
 
     const paths = []

@@ -1,6 +1,6 @@
 import { PasswordEncoder } from '@user/application/port/password-encoder'
 import { UserRepository } from '@user/adapter/persistence/user-repository-port'
-import { AuthPort } from '../port/auth-port'
+import { AuthData, AuthPort } from '../port/auth-port'
 import { AppError } from '@shared/appError'
 import { TokenManager } from '@external-libraries/token-manager/token-manager-port'
 
@@ -11,7 +11,7 @@ export class AuthService implements AuthPort {
     private tokenManager: TokenManager
   ) {}
 
-  async signIn(email: string, password: string): Promise<string | AppError> {
+  async signIn(email: string, password: string): Promise<AuthData | AppError> {
     const errorMsgPassOrEmail = 'Email e/ou senha incorreto(s)'
     const user = await this.userRepository.findByEmail(email)
     if (!user) {
@@ -27,6 +27,6 @@ export class AuthService implements AuthPort {
     }
 
     const token = this.tokenManager.sign({ userId: user.id })
-    return token
+    return { token, id: user.id }
   }
 }

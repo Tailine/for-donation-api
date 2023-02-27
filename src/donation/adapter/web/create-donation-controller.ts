@@ -18,8 +18,13 @@ export class CreateDonationController {
 
   handle = async (request: Request, response: Response) => {
     const { title, email, phone, description, categoryId, userId } =
-      request.body as DonationRequestData
+      request.body
 
+    console.log({
+      body: request.body,
+      files: request.files,
+      file: request.file
+    })
     const emailOrError = Email.create(email)
     if (emailOrError.isFailure) {
       return response.status(400).json({
@@ -64,12 +69,15 @@ export class CreateDonationController {
         userId
       )
 
+      console.log({ resp })
+
       if (resp instanceof AppError) {
         return response.status(resp.statusCode).json({ message: resp.message })
       }
 
-      return response.status(200).json({ data: resp })
-    } catch (error) {
+      return response.status(201).json({ data: resp })
+    } catch (err) {
+      console.log(err)
       return response.status(500).json({
         message: 'Erro no servidor, tente novamente mais tarde'
       })

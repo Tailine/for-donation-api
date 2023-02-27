@@ -1,7 +1,7 @@
 import { Category } from '@category/adapter/persistence/category.entity'
 import { postgresDataSource } from '@config/typeorm'
 import { User } from '@user/adapter/persistence/user.entity'
-import { Repository } from 'typeorm'
+import { FindOptionsRelations, Repository } from 'typeorm'
 import { NewDonation, DonationRepository } from './donation-repository-port'
 import { Donation } from './donation.entity'
 
@@ -27,7 +27,23 @@ export class TypeormDonationRepository implements DonationRepository {
   }
 
   async findAll(): Promise<Donation[]> {
+    return this.donationRepository.find({
+      relations: {
+        category: true,
+        user: true
+      },
+      select: {
+        user: {
+          city: true,
+          state: true
+        }
+      }
+    })
+  }
+
+  async findAllByUser(userId: string): Promise<Donation[]> {
     return await this.donationRepository.find({
+      where: { user: { id: userId } },
       relations: {
         category: true
       }

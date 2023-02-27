@@ -9,6 +9,7 @@ export class QueryDonationController {
       const donations = await this.donationService.getDonations()
       return response.status(200).json(donations)
     } catch (error) {
+      console.log({ error })
       return response.status(400).json({
         message: 'Erro ao buscar doações. Tente novamente mais tarde'
       })
